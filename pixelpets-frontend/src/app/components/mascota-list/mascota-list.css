@@ -1,0 +1,339 @@
+* {
+  box-sizing: border-box;
+}
+
+.contenedor {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg, #f4f6fb 0%, #eef1f8 100%);
+  min-height: 100vh;
+}
+
+/* ---------- Encabezado ---------- */
+.encabezado {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.encabezado h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  background: linear-gradient(90deg, #6a5acd, #ff6ec4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+.subtitulo {
+  color: #6b7280;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+/* ---------- Panel de controles ---------- */
+.panel-controles {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+}
+
+.fila-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.fila-controles:last-child {
+  margin-bottom: 0;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.campo label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.busqueda {
+  flex: 1;
+  min-width: 260px;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.busqueda .icono {
+  position: absolute;
+  left: 12px;
+  font-size: 0.95rem;
+  opacity: 0.5;
+}
+
+.busqueda input {
+  flex: 1;
+  padding: 0.65rem 0.8rem 0.65rem 2.2rem;
+  border: 1px solid #e0e3eb;
+  border-radius: 10px 0 0 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.busqueda input:focus {
+  border-color: #6a5acd;
+}
+
+select {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #e0e3eb;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.grupo-botones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  padding: 0.65rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primario {
+  background: linear-gradient(90deg, #6a5acd, #8a7bea);
+  color: white;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 2px 8px rgba(106, 90, 205, 0.35);
+}
+
+.btn-secundario {
+  background: #f0f1f8;
+  color: #4b4f6b;
+}
+
+.btn-secundario:hover {
+  background: #e2e4f3;
+}
+
+.btn-limpiar {
+  background: #fff0f0;
+  color: #d9534f;
+}
+
+.btn-limpiar:hover {
+  background: #ffe1e1;
+}
+
+/* ---------- Resultados ---------- */
+.contador {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0.2rem;
+}
+
+.grid-mascotas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ---------- Tarjeta de mascota ---------- */
+.tarjeta {
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  border-top: 5px solid #a3a3a3;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta[data-rareza="Común"] {
+  border-top-color: #9ca3af;
+}
+
+.tarjeta[data-rareza="Rara"] {
+  border-top-color: #3b82f6;
+}
+
+.tarjeta[data-rareza="Épica"] {
+  border-top-color: #a855f7;
+}
+
+.tarjeta[data-rareza="Legendaria"] {
+  border-top-color: #f59e0b;
+}
+
+.tarjeta-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.etiqueta-rareza {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.tarjeta[data-rareza="Legendaria"] .etiqueta-rareza {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.tarjeta[data-rareza="Épica"] .etiqueta-rareza {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.tarjeta[data-rareza="Rara"] .etiqueta-rareza {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.etiqueta-id {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.nombre-mascota {
+  margin: 0 0 0.15rem;
+  font-size: 1.25rem;
+  color: #1f2937;
+}
+
+.especie-mascota {
+  margin: 0 0 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.tarjeta-detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  border-top: 1px solid #f0f1f5;
+  padding-top: 0.75rem;
+}
+
+.detalle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.detalle-etiqueta {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  min-width: 45px;
+}
+
+.detalle-valor {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.precio {
+  color: #16a34a;
+  font-size: 1rem;
+}
+
+.barra-salud {
+  flex: 1;
+  height: 8px;
+  background: #f0f1f5;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0 0.5rem;
+}
+
+.barra-salud-relleno {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.barra-salud-relleno.salud-alta {
+  background: #22c55e;
+}
+
+.barra-salud-relleno.salud-media {
+  background: #f59e0b;
+}
+
+.barra-salud-relleno.salud-baja {
+  background: #ef4444;
+}
+
+/* ---------- Sin resultados ---------- */
+.sin-resultados {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #9ca3af;
+}
+
+.icono-vacio {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .fila-controles {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .busqueda {
+    min-width: unset;
+  }
+
+  select,
+  .grupo-botones,
+  .btn-limpiar {
+    width: 100%;
+  }
+}

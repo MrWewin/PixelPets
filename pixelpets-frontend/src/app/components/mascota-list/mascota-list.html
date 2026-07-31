@@ -1,0 +1,98 @@
+<div class="contenedor">
+  <header class="encabezado">
+    <h1>🐾 PixelPets</h1>
+    <p class="subtitulo">Catálogo de mascotas digitales</p>
+  </header>
+
+  <section class="panel-controles">
+    <div class="fila-controles">
+      <div class="campo busqueda">
+        <span class="icono">🔍</span>
+        <input
+          type="text"
+          placeholder="Buscar mascota por nombre..."
+          [(ngModel)]="nombreBusqueda"
+          (keyup.enter)="buscar()"
+        />
+        <button class="btn btn-primario" (click)="buscar()">Buscar</button>
+      </div>
+    </div>
+
+    <div class="fila-controles">
+      <div class="campo">
+        <label>Especie</label>
+        <select [(ngModel)]="especieSeleccionada" (change)="filtrarPorEspecie()">
+          <option value="">Todas</option>
+          <option *ngFor="let especie of especies" [value]="especie">{{ especie }}</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Rareza</label>
+        <select [(ngModel)]="rarezaSeleccionada" (change)="filtrarPorRareza()">
+          <option value="">Todas</option>
+          <option *ngFor="let rareza of rarezas" [value]="rareza">{{ rareza }}</option>
+        </select>
+      </div>
+
+      <div class="campo botones-orden">
+        <label>Ordenar por precio</label>
+        <div class="grupo-botones">
+          <button class="btn btn-secundario" (click)="ordenarAscendente()">↑ Menor</button>
+          <button class="btn btn-secundario" (click)="ordenarDescendente()">↓ Mayor</button>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>&nbsp;</label>
+        <button class="btn btn-limpiar" (click)="limpiarFiltros()">✕ Limpiar filtros</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="resultados">
+    <p class="contador" *ngIf="mascotas.length > 0">
+      {{ mascotas.length }} mascota{{ mascotas.length === 1 ? '' : 's' }} encontrada{{ mascotas.length === 1 ? '' : 's' }}
+    </p>
+
+    <div class="grid-mascotas" *ngIf="mascotas.length > 0; else sinResultados">
+      <div class="tarjeta" *ngFor="let mascota of mascotas" [attr.data-rareza]="mascota.rareza">
+        <div class="tarjeta-encabezado">
+          <span class="etiqueta-rareza">{{ mascota.rareza }}</span>
+          <span class="etiqueta-id">#{{ mascota.id }}</span>
+        </div>
+
+        <h3 class="nombre-mascota">{{ mascota.nombre }}</h3>
+        <p class="especie-mascota">{{ mascota.especie }}</p>
+
+        <div class="tarjeta-detalles">
+          <div class="detalle">
+            <span class="detalle-etiqueta">Precio</span>
+            <span class="detalle-valor precio">${{ mascota.precio | number: '1.0-0' }}</span>
+          </div>
+
+          <div class="detalle">
+            <span class="detalle-etiqueta">Salud</span>
+            <div class="barra-salud">
+              <div
+                class="barra-salud-relleno"
+                [style.width.%]="mascota.estadoSalud"
+                [class.salud-baja]="mascota.estadoSalud < 50"
+                [class.salud-media]="mascota.estadoSalud >= 50 && mascota.estadoSalud < 80"
+                [class.salud-alta]="mascota.estadoSalud >= 80"
+              ></div>
+            </div>
+            <span class="detalle-valor">{{ mascota.estadoSalud }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #sinResultados>
+      <div class="sin-resultados">
+        <span class="icono-vacio">🔎</span>
+        <p>No se encontraron mascotas con esos criterios.</p>
+      </div>
+    </ng-template>
+  </section>
+</div>
